@@ -38,10 +38,10 @@ def winnercheck():
     for every in range(len(tttboard)):
         if tttboard[every] == ["X"] * 3:
             winner = "Horizontal"
-            return f"Congrats, Player 'X' Won!"
+#             return f"Congrats, Player 'X' Won!"
         elif tttboard[every] == ["O"] * 3:
             winner = "Horizontal"
-            return f"Congrats, Player 'O' Won!"
+#             return f"Congrats, Player 'O' Won!"
         
     # vertical col wins
     boardsplit = []
@@ -51,10 +51,10 @@ def winnercheck():
     for test in range(3):
         if (boardsplit[test::3]) == (["X"] * 3):
             winner = "Vertical"
-            return f"Congrats, Player 'X' Won!"
+#             return f"Congrats, Player 'X' Won!"
         elif (boardsplit[test::3]) == (["O"] * 3):
             winner = "Vertical"
-            return f"Congrats, Player 'O' Won!"
+#             return f"Congrats, Player 'O' Won!"
 
     # diagonal wins
     diaglist1 = []
@@ -64,10 +64,10 @@ def winnercheck():
     diaglist2 += [tttboard[0][2], tttboard[1][1], tttboard[2][0]]
     if diaglist1 == (["X"] * 3) or diaglist2 == (["X"] * 3):
         winner = "Diagonal"
-        return f"Congrats, Player 'X' Won!"
+#         return f"Congrats, Player 'X' Won!"
     elif diaglist1 == (["O"] * 3) or diaglist2 == (["O"] * 3):
         winner = "Diagonal"
-        return f"Congrats, Player 'O' Won!"
+#         return f"Congrats, Player 'O' Won!"
 
 
 #---------GAME LOOP:---------
