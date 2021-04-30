@@ -26,7 +26,6 @@ def playerturn():
         tttboard[2] = valueslist[6:9]
 
 
-
 # ------------------Winner Check-----
 
 winner = "no"
@@ -68,8 +67,6 @@ def winnercheck():
     elif diaglist1 == (["O"] * 3) or diaglist2 == (["O"] * 3):
         winner = "Diagonal"
         return f"Congrats, Player 'O' Won!"
-
-
 
 
 #---------GAME LOOP:---------
