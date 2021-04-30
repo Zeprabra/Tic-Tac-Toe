@@ -42,7 +42,8 @@ def winnercheck():
         elif tttboard[every] == ["O"] * 3:
             winner = "Horizontal"
             return f"Congrats, Player 'O' Won!"
-
+        
+    # vertical col wins
     boardsplit = []
     for x in tttboard:
         for y in x:
@@ -55,7 +56,7 @@ def winnercheck():
             winner = "Vertical"
             return f"Congrats, Player 'O' Won!"
 
-
+    # diagonal wins
     diaglist1 = []
     for x in range(3):
         diaglist1 += [tttboard[x][x]] #tttboard[1][1], tttboard[2][2]] (made shorter)
