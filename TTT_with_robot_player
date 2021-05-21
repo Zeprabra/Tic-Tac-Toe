@@ -1,0 +1,169 @@
+
+tttboard=[
+    ["_", "_", "_"],
+    ["_", "_", "_"],
+    ["_", "_", "_"]
+]
+
+#----------------------------------------playerturn func
+movedict = {
+        "1": tttboard[0][0], "2": tttboard[0][1], "3": tttboard[0][2],
+        "4": tttboard[1][0], "5": tttboard[1][1], "6": tttboard[1][2],
+        "7": tttboard[2][0], "8": tttboard[2][1], "9": tttboard[2][2],
+    }
+
+def playerturn():
+    global tttboard
+    global movedict
+
+
+    valueslist = []
+
+    for count, values in movedict.items():
+        valueslist.append(values)
+        tttboard[0] = valueslist[:3]
+        tttboard[1] = valueslist[3:6]  # assigning dict values to tttboard
+        tttboard[2] = valueslist[6:9]
+
+
+#--------------computer player
+
+import random
+import time
+
+# def computer():
+
+
+
+
+
+
+
+
+
+
+# ------------------Winner Check-----
+
+winner = "no"
+
+def winnercheck():
+    global tttboard
+    global winner
+
+    # horizontal row wins (instead of [0],[1],[2], i used range(len()) in for loop
+    for every in range(len(tttboard)):
+        if tttboard[every] == ["X"] * 3:
+            winner = "Horizontal"
+            # return f"Congrats, Player 'X' Won!"
+        elif tttboard[every] == ["O"] * 3:
+            winner = "Horizontal"
+            # return f"Congrats, Player 'O' Won!"
+
+    #vertical win
+    boardsplit = []
+    for x in tttboard:
+        for y in x:
+            boardsplit.append(y)
+    for test in range(3):
+        if (boardsplit[test::3]) == (["X"] * 3):
+            winner = "Vertical"
+            # return f"Congrats, Player 'X' Won!"
+        elif (boardsplit[test::3]) == (["O"] * 3):
+            winner = "Vertical"
+            # return f"Congrats, Player 'O' Won!"
+
+    #diagonal win
+    diaglist1 = []
+    for x in range(3):
+        diaglist1 += [tttboard[x][x]] #tttboard[1][1], tttboard[2][2]] (made shorter)
+    diaglist2 = []
+    diaglist2 += [tttboard[0][2], tttboard[1][1], tttboard[2][0]]
+    if diaglist1 == (["X"] * 3) or diaglist2 == (["X"] * 3):
+        winner = "Diagonal"
+        # return f"Congrats, Player 'X' Won!"
+    elif diaglist1 == (["O"] * 3) or diaglist2 == (["O"] * 3):
+        winner = "Diagonal"
+        # return f"Congrats, Player 'O' Won!"
+
+
+
+
+
+#---------GAME LOOP:---------
+
+humanchoice=input("Would you like to go 1st (X) or 2nd (O)?").upper()
+
+if humanchoice.upper() != 'X' and humanchoice.upper() != 'O':   #YOU CANT USE OR BECAUSE IF u type X, then != 'O' will be True, and vice versa
+    humanchoice = input("Sorry, that answer was invalid, please choose 'X' or 'O'")
+
+
+xturn = 1 if humanchoice.upper()=='X' else 0
+
+# for x in tttboard:        #NEW NEW maybe change later
+#     print("|".join(x))
+
+
+while winner == "no":
+
+    compmove = random.randint(1, 9)      #NEW  NEW (computer move)
+    #
+    # if humanchoice=='O':                   #NEW NEW NEW (execs if comp goes 1st)
+    #     movedict[str(compmove)] = "X"
+    #     while movedict[str(compmove)] != "_":
+    #         compmove = random.randint(1, 9)
+    #     print("computer made his move\n")
+    #     for x in tttboard:
+    #         print("|".join(x))
+
+    # movedict[str(compmove)] = "O" if xturn == 1 else "X"  # NEW NEW NEW
+
+
+
+    xmove = input("\nWhich square do you want to make ur move\n(from 1-9)?\n")
+
+    try:            #REMOVES ERRORS day 2
+        if movedict[xmove]!="_":
+            raise Exception
+    #     elif int(xmove) not in range(1,9+1):   #Removing non existent error where it prints Exception block if xmove != range(1,9+1) DAY 2
+    #         raise ValueError
+    # except ValueError:
+    #     print("That square isn't on the board, try again")
+    #     continue
+    except Exception:
+        print("That square is already taken, try again") #or: u cant move there
+        continue
+    else:
+        pass
+
+    while movedict[str(compmove)] != "_":           #NEW NEW NEW
+        compmove = random.randint(1, 9)
+        # print(compmove)
+        # movedict[str(compmove)] = "O" if xturn == 1 else "X"
+        print(movedict[str(compmove)])
+
+
+    movedict[str(compmove)]="O" if xturn == 1 else "X"     #NEW NEW NEW
+
+
+    movedict[xmove] = ("X" if xturn == 1 else "O")
+
+
+    playerturn()
+    winnercheck()
+    for x in tttboard:
+        print("|".join(x))
+    if winner != "no":
+        print(f"Player {'X' if xturn == 1 else 'O'} Won With The {winner} Pattern!") #change this
+
+    newsplit=[y for x in tttboard for y in x]   #FINAL DRAW
+    if "_" not in newsplit:
+        winner="Draw"
+        print("It's a Draw!")
+
+
+
+    # xturn = (0 if movedict[xmove] == "X" else 1)        #will removing this make human player stay to 1 character
+
+
+#add a computer player
+
